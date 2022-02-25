@@ -1,0 +1,25 @@
+from replit import clear #programming using replit, need to import clear() function
+from art import logo #logo was installed in a art.py file
+
+
+print(logo)
+
+name = input("What is your name?: ")
+bid = input("What is your bid?: $")
+again = input("Are there any other bidders? Type 'yes' or 'no'.\n")
+
+while again == "yes":
+    clear()
+    name = input("What is your name?: ")
+    bid = input("What is your bid?: $")
+    again = input("Are there any other bidders? Type 'yes' or 'no'.\n")
+    bidding = {}
+    bidding[name] = bid
+
+for participant in bidding:
+    winning_price = 0
+    winner = ""
+    if round(int(bidding[participant])) > winning_price:
+        winning_price = bidding[participant]
+        winner = participant
+print(f"The winner is {winner} with a bid of ${winning_price}.")
