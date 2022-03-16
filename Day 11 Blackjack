@@ -1,0 +1,96 @@
+from replit import clear
+import art
+import random
+
+
+cards = [11, 2, 3, 4, 5, 6, 7, 8, 9, 10, 10, 10, 10]
+
+play = True
+
+
+
+
+
+while play == True:
+    #wanna play?
+    stop = input("Do you want to play a game of blackjack? Type 'y' or 'n': ")
+    
+    #quit the game
+    if stop == "n":
+        play = False
+
+    #starting
+    elif stop == "y":
+        clear()
+        print(art.logo)
+        gamble = True
+
+        #initial 2 cards:
+        def delt():
+            card = random.choice(cards)
+            return card
+        
+        my_card = []
+        pc_card = []
+        
+        for card in range(2):
+            my_card.append(delt())
+            pc_card.append(delt())
+
+        my_score = sum(my_card)
+        pc_score = sum(pc_card)
+        pc_first = pc_card[0]
+
+        print(f"  Your cards: {my_card}, current score: {my_score}")
+        print(f"  Computer's first card: {pc_first}")
+
+        #computer getting cards
+        while pc_score <= 17:
+            pc_card.append(delt())
+            pc_score = sum(pc_card)
+
+        #more cards for you?
+        while gamble == True:
+            more = input("Type 'y' to get another card, type 'n' to pass: ")
+            
+            #deal one more cards
+            if more == "y":
+                my_card.append(delt())
+                my_score = sum(my_card)
+                print(f"  Your cards: {my_card}, current score: {my_score}")
+                print(f"  Computer's first card: {pc_first}")
+    
+                #went over - ending games
+                if my_score > 21:
+                    gamble = False
+                    print(f"  Your final hand: {my_card}, final score: {my_score}")
+                    print(f"  Computer's final hand: {pc_card}, final score: {pc_score}")
+                    print(f"You went over. You lose.😔")
+                    gamble == False
+                
+            #didn't go over
+            elif more == "n":
+                print(f"  Your final hand: {my_card}, final score: {my_score}")
+                print(f"  Computer's final hand: {pc_card}, final score: {pc_score}")
+                
+                #who win?
+                if my_score > pc_score:
+                    print("You win.😊")
+                    gamble = False
+                elif my_score == pc_score:
+                    print("Draw.🤝")
+                    gamble = False
+                else:
+                    print("You lose. 😔")
+                    gamble = False
+
+        
+                
+
+        
+                
+                
+            
+            
+
+        
