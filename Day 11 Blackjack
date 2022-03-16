@@ -74,15 +74,20 @@ while play == True:
                 print(f"  Computer's final hand: {pc_card}, final score: {pc_score}")
                 
                 #who win?
-                if my_score > pc_score:
+                if pc_score > 21:
                     print("You win.😊")
                     gamble = False
-                elif my_score == pc_score:
-                    print("Draw.🤝")
-                    gamble = False
                 else:
-                    print("You lose. 😔")
-                    gamble = False
+                    if my_score > pc_score:
+                        print("You win.😊")
+                        gamble = False
+                    elif my_score == pc_score:
+                        print("Draw.🤝")
+                        gamble = False
+                    else:
+                        print("You lose. 😔")
+                        gamble = False
+
 
         
                 
