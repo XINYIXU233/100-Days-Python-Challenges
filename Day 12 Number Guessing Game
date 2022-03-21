@@ -1,0 +1,99 @@
+import random
+logo ="""
+$$\   $$\  $$$$$$\  $$\   $$\  $$$$$$\        $$\       $$$$$$\   $$$$$$\  $$$$$$$$\ $$$$$$$\        
+$$ |  $$ |$$  __$$\ $$ |  $$ |$$  __$$\       $$ |     $$  __$$\ $$  __$$\ $$  _____|$$  __$$\       
+$$ |  $$ |$$ /  $$ |$$ |  $$ |$$ /  $$ |      $$ |     $$ /  $$ |$$ /  \__|$$ |      $$ |  $$ |      
+$$$$$$$$ |$$$$$$$$ |$$$$$$$$ |$$$$$$$$ |      $$ |     $$ |  $$ |\$$$$$$\  $$$$$\    $$$$$$$  |      
+$$  __$$ |$$  __$$ |$$  __$$ |$$  __$$ |      $$ |     $$ |  $$ | \____$$\ $$  __|   $$  __$$<       
+$$ |  $$ |$$ |  $$ |$$ |  $$ |$$ |  $$ |      $$ |     $$ |  $$ |$$\   $$ |$$ |      $$ |  $$ |      
+$$ |  $$ |$$ |  $$ |$$ |  $$ |$$ |  $$ |      $$$$$$$$\ $$$$$$  |\$$$$$$  |$$$$$$$$\ $$ |  $$ |      
+\__|  \__|\__|  \__|\__|  \__|\__|  \__|      \________|\______/  \______/ \________|\__|  \__|      
+"""   
+print(logo)
+print("Welcom to the Number Guessing Game!")
+print("I'm thinking about a number between 1 and 100.")
+
+#generate the number
+answer = random.randint(1, 100)
+#cheat line
+#print(f"Cheat: the answer is {answer}")
+
+#breaking game
+stop = False
+
+#choose difficulty
+level = input("Choose a difficulty. Type 'easy' or 'hard': ")
+
+
+# function feedback: high or low?
+def feedback(guess):
+    if guess > answer:
+        return "high"
+    elif guess < answer:
+        return "low"
+    elif guess == answer:
+        return "won"
+
+
+# make a guess
+if level == "easy":
+    print("You have 10 remaining attempts to guess the number.")
+elif level == "hard":
+    print("You have 5 remaining attempts to guess the number.")
+choice = int(input("Make a guess: "))
+# repeat
+# easy = 5 chances; hard = 10 chances
+if level == "easy":
+    feedback(choice)
+    while feedback(choice) != "won" and stop == False:
+        for a in range(9):
+            remain_chance = 9 - a
+            if feedback(choice) == "low":
+                print("Too low.")
+                print(
+                    f"You have {remain_chance} attempts remaining to guess the number."
+                )
+                choice = int(input("Make a guess: "))
+            elif feedback(choice) == "high":
+                print("Too high.")
+                print(
+                    f"You have {remain_chance} attempts remaining to guess the number."
+                )
+                choice = int(input("Make a guess: "))
+            elif feedback(choice) == "won":
+                stop = True
+
+        stop = True
+        if feedback(choice) == "won" and remain_chance == 1:
+            stop = True
+        else:
+            print("You ran out of attempts. You lose.")
+    if feedback(choice) == "won":
+        print(f"You won. The correct answer is {answer}")
+elif level == "hard":
+    feedback(choice)
+    while feedback(choice) != "won" and stop == False:
+        for a in range(4):
+            remain_chance = 4 - a
+            if feedback(choice) == "low":
+                print("Too low.")
+                print(
+                    f"You have {remain_chance} attempts remaining to guess the number."
+                )
+                choice = int(input("Make a guess: "))
+            elif feedback(choice) == "high":
+                print("Too high.")
+                print(
+                    f"You have {remain_chance} attempts remaining to guess the number."
+                )
+                choice = int(input("Make a guess: "))
+            elif feedback(choice) == "won":
+                stop = True
+
+        stop = True
+        if feedback(choice) == "won" and remain_chance == 1:
+            stop = True
+        else:
+            print("You ran out of attempts. You lose.")
+    if feedback(choice) == "won":
+        print(f"You won. The correct answer is {answer}")
