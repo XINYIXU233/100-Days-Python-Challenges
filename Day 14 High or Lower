@@ -14,7 +14,7 @@ def pick():
     print(f'Compare A: {item_A["name"]}, {item_A["description"]}, from {item_A["country"]}.')
     print(vs)
     print(f'Against B: {item_B["name"]}, {item_B["description"]}, from {item_B["country"]}.')
-    print(f'A: {item_A["follower_count"]}, B: {item_B["follower_count"]}')
+    #print(f'A: {item_A["follower_count"]}, B: {item_B["follower_count"]}')
     choose = input("Who has more followers? Type 'A' or 'B': ").upper()
     return choose, item_A, item_B
 
