@@ -1,0 +1,65 @@
+# importing everything
+from art import logo
+from art import vs
+from game_data import data
+import random 
+from replit import clear
+
+print(logo)
+#random pick an item from data
+def pick():    
+    compare_items = random.sample(data,2)
+    item_A = compare_items[0]
+    item_B = compare_items[1]
+    print(f'Compare A: {item_A["name"]}, {item_A["description"]}, from {item_A["country"]}.')
+    print(vs)
+    print(f'Against B: {item_B["name"]}, {item_B["description"]}, from {item_B["country"]}.')
+    print(f'A: {item_A["follower_count"]}, B: {item_B["follower_count"]}')
+    choose = input("Who has more followers? Type 'A' or 'B': ").upper()
+    return choose, item_A, item_B
+
+# later pick
+def later_pick(item_B):
+    later_item_A = item_B
+    index = data.index(later_item_A)
+    del data[index]
+    later_item_B = random.choice(data)
+    print(f'Compare A: {later_item_A["name"]}, {later_item_A["description"]}, from {later_item_A["country"]}.')
+    print(vs)
+    print(f'Against B: {later_item_B["name"]}, {later_item_B["description"]}, from {later_item_B["country"]}.')
+    choose = input("Who has more followers? Type 'A' or 'B': ").upper()
+    return choose, later_item_A, later_item_B
+
+
+# compare followers
+game = True
+score = 0
+def compare(choose,item_A,item_B):
+    global score 
+    global game 
+    if choose == "A" and item_A["follower_count"] > item_B["follower_count"]:
+        score += 1
+        print(f"You are right! Current score: {score}.")
+        game = True
+    elif choose == "B" and item_B["follower_count"] > item_A["follower_count"]:
+        score += 1
+        print(f"You are right! Current score: {score}.")
+        game = True
+    else:
+        clear()
+        print(f"Sorry, you lose. Final score: {score}.")
+        game = False
+    return score, game
+
+def game():
+    forpick = pick()
+    clear()
+    print(logo)
+    result = compare(forpick[0],forpick[1],forpick[2])
+    while game == True:
+        forpick = later_pick(forpick[2])
+        clear()
+        print(logo)
+        result = compare(forpick[0],forpick[1],forpick[2])
+    
+game()
