@@ -1,0 +1,26 @@
+from menu import Menu, MenuItem
+from coffee_maker import CoffeeMaker
+from money_machine import MoneyMachine
+
+is_on = True
+machine = CoffeeMaker()
+money = MoneyMachine()
+menu = Menu()
+
+while is_on:
+    # TODO: 1. ask what do you want?
+    reaction = input("What would you like? (espresso/latte/cappuccino/): ")
+    # TODO: 2. turn off
+    if reaction == "off":
+        is_on = False
+    # TODO: 3. generate report
+    elif reaction == "report":
+        machine.report()
+        money.report()
+    else:
+        order = menu.find_drink(reaction) # order input related to MenuItem
+        # TODO: 4. check efficiency
+        if machine.is_resource_sufficient(order):
+            # TODO: 5. coin process
+            if money.make_payment(order.cost):
+                machine.make_coffee(order)
